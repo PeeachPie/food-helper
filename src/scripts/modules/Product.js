@@ -1,6 +1,8 @@
 const fs = require('fs');
 
 const productElements = require('../../../config/default.json').productElements
+
+const { addToJSON } = require('./utils.js')
 class Product {
   constructor(options) {
     this.name = options.name;
@@ -17,21 +19,25 @@ class Product {
   }
 
   _addToJSON() {
-    const products = require('../../data/products.json');
-
-    products[this.name] = this;
-
-    fs.writeFile('./src/data/products.json', JSON.stringify(products), (err) => {
-      if (err) {
-        throw err;
-      }
-    });
+    addToJSON('../../data/products.json', this.name, this)
   }
 
   static create(options) {
     const product = new this(options);
     product._addToJSON();
     return product;
+  }
+
+  static createElement(product) {
+    /* TODO: 
+      add button to change product
+      add button to show information about product
+    */
+    let productElement = document.createElement('div')
+    productElement.className = 'product'
+    productElement.innerHTML = product.name
+    productElement.addEventListener('click', () => console.log(product.calories))  
+    return productElement ;
   }
 }
 
