@@ -2,19 +2,63 @@ const fs = require('fs');
 
 const { Product } = require('./src/scripts/modules/Product.js')
 
-const products = require('./src/data/products.json');
+const { Meal } = require('./src/scripts/modules/Meal.js')
 
-const options = {
-  name: 'яйцо обычное',
-  weight: 150,
-  calories: 90,
-  proteins: 2,
-  fats: 1,
-  carbohydrates: 70,
-}
+const meal = new Meal({
+  products: [
+    {
+      name: "bread",
+      weight: 300,
+      number: 3,
+    },
+    {
+      name: "milk",
+      weight: 452,
+      number: 3,
+    },
+  ],
+  date: new Date(),
+  name: "breakfast",
+});
 
-const p = new Product(options)
+console.log(meal)
 
-products[p.name] = p;
+console.log(meal.countComposition())
 
-fs.writeFile('./src/data/products.json', JSON.stringify(products), err => {console.log(err)})
+// const inp = document.querySelector('input');
+
+// inp.addEventListener('change', () => {
+//   console.log(inp.value);
+//   console.log(new Date(inp.value))
+// })
+
+
+// const bread = {
+//   name: 'bread',
+//   calories: 235,
+//   proteins: 7.9,
+//   fats: 1,
+//   carbohydrates: 48.3,
+// }
+
+// const milk = {
+//   name: 'milk',
+//   calories: 60,
+//   proteins: 2.9,
+//   fats: 3.2,
+//   carbohydrates: 4.7,
+// }
+
+// const sausage = {
+//   name: 'sausage',
+//   calories: 257,
+//   proteins: 16.4,
+//   fats: 25.4,
+//   carbohydrates: 3.1,
+// }
+
+// Product.create(sausage)
+// Product.create(bread)
+// Product.create(milk)
+
+

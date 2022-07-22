@@ -1,21 +1,38 @@
+const fs = require('fs');
+
+const productElements = require('../../../config/default.json').productElements
 class Product {
   constructor(options) {
     this.name = options.name;
 
-    // параметры продукта на 100 грамм
-    this.calories      = options.calories;      // калорийность продукта в кклал
-    this.proteins      = options.proteins;      // количество белков 
-    this.fats          = options.fats;          // количество жиров
-    this.carbohydrates = options.carbohydrates; // количество углеводов
+    // composition of the product per 100 grams
+    
+    productElements.forEach(element => this[element] = options[element] || 0);
 
-    // вес съеденного продукта
+    // weight of eaten
     this.weight = 0;
 
-    // количество съеденных штук
+    // number of eaten
     this.number = 0;
   }
+
+  _addToJSON() {
+    const products = require('../../data/products.json');
+
+    products[this.name] = this;
+
+    fs.writeFile('./src/data/products.json', JSON.stringify(products), (err) => {
+      if (err) {
+        throw err;
+      }
+    });
+  }
+
+  static create(options) {
+    const product = new this(options);
+    product._addToJSON();
+    return product;
+  }
 }
-
-
 
 module.exports = { Product }
