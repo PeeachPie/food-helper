@@ -3,6 +3,15 @@
 const foodElements = require('../../../config/default.json').foodElements
 
 const { addToJSON, countComposition} = require('./utils.js')
+
+// const fs = require('fs');
+
+// const { addToJSON } = require('./utils.js')
+
+// const productElements = require('../../../config/default.json').productElements
+
+const foodsComposition = require('../../data/foods.json')
+
 class Product {
   constructor(options) {
     this.name = options.name;
@@ -68,4 +77,79 @@ class Product {
   }
 }
 
-module.exports = { Product }
+class Food {
+  constructor(products) {
+    this.composition = {};
+    this.products = products;
+  }
+
+  static create(products) {
+
+  }
+
+  static _countComposition() {
+    this.composition.weight = this.products.reduce((totalWeight, product) => totalWeight + product.weight, 0)
+    this.products.forEach((product) => {
+      productElements.forEach((param) => {
+        this.composition[param] += Math.round(productsComposition[product.name][param] * product.weight / 10) / 10;
+      });
+    });
+
+    // fs.writeFile('./src/data/products.json', JSON.stringify(productsComposition), (err) => {
+    //   if (err) {
+    //     throw err;
+    //   }
+    // });
+
+    return this.composition;
+  }
+
+}
+
+
+class Meal {
+  constructor(options) {
+    this.products = options.products;
+    this.date = options.date;
+    this.name = options.name || this._createName();
+    this.composition = countComposition(this.products, foodsComposition)
+  }
+
+  static create(options) {
+    const meal = new this(options)
+    meal._addToJSON()
+    return meal
+  }
+   _createName() {
+    const hours = this.date.getHours();
+    if (hours <= 12) {
+      return 'breakfast'
+    } else if (hours >= 12 && hours <= 16) {
+      return 'lunch'
+    } else {
+      return 'dinner'
+    }
+  }
+
+  _addToJSON() {
+    addToJSON('../../data/foods.json', this.name, this)
+  }
+}
+
+class Day {
+  constructor () {
+
+  }
+
+  addMeal(meal) {
+    
+  }
+}
+
+
+module.exports = { 
+  Product,
+  Food,
+  Meal,
+  Day
+ }

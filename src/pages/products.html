@@ -1,14 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
 </head>
+
 <body>
   <div class="container">
-    <button type="button" class="btn-create-new-product"></button>
+    <!-- TODO: button which shows menu of adding product
+               add checkbox vegan 
+    -->
+    <div class="adding-new-product">
+      <div class="composition-of-product">
+        <div class="inputContainer">
+          <div class="">name: </div>
+          <input type="text" class="option" id="name"></input>
+        </div>
+      </div>
+
+      <button type="button" id="btn-add-new-product">добавить новый продукт</button>
+    </div>
     <div class="products-container">
 
     </div>
@@ -16,4 +30,5 @@
   </div>
   <script type="module" src="../scripts/show-products.js"></script>
 </body>
+
 </html>

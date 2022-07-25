@@ -1,27 +1,27 @@
 const fs = require('fs');
 
-const { Product } = require('./src/scripts/modules/Product.js')
+const { Product, Meal } = require('./src/scripts/modules/FoodLevels.js')
 
-const { Meal } = require('./src/scripts/modules/Meal.js')
+// const { Meal } = require('./src/scripts/modules/Meal.js')
 
-// const meal = new Meal({
-//   products: [
-//     {
-//       name: "bread",
-//       weight: 300,
-//       number: 3,
-//     },
-//     {
-//       name: "milk",
-//       weight: 452,
-//       number: 3,
-//     },
-//   ],
-//   date: new Date(),
-//   name: "breakfast",
-// });
+const meal = new Meal({
+  products: [
+    {
+      name: "bread",
+      weight: 300,
+      number: 3,
+    },
+    {
+      name: "milk",
+      weight: 452,
+      number: 3,
+    },
+  ],
+  date: new Date(),
+  name: "breakfast",
+});
 
-// console.log(meal)
+console.log(meal)
 
 // console.log(meal.countComposition())
 
