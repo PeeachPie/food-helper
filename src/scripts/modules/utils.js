@@ -2,8 +2,6 @@ const fs = require('fs');
 
 const foodElements = require('../../../config/default.json').foodElements
 
-const productsComposition = require('../../data/products.json')
-
 function writeJSON(pathToJSON, object) {
   fs.writeFile(pathToJSON, JSON.stringify(object), (err) => {
     if (err) { throw err; }
@@ -12,11 +10,8 @@ function writeJSON(pathToJSON, object) {
  
 function addToJSON (pathToJSON, name, object) {
   const data = require(pathToJSON);
-  const absolutePathToJSON = require.resolve(pathToJSON)
-
   data[name] = object;
-
-  writeJSON(absolutePathToJSON, data)
+  writeJSON(require.resolve(pathToJSON), data)
 }
 
 function countComposition(foods, foodsComposition) {

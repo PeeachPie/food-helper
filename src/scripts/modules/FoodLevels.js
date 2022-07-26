@@ -146,7 +146,6 @@ class Day {
   }
 }
 
-
 module.exports = { 
   Product,
   Food,
