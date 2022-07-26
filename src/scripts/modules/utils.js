@@ -1,4 +1,5 @@
 const fs = require('fs');
+const path = require('path');
 
 const foodElements = require('../../../config/default.json').foodElements
 
@@ -9,9 +10,12 @@ function writeJSON(pathToJSON, object) {
 }
  
 function addToJSON (pathToJSON, name, object) {
-  const data = require(pathToJSON);
+  const absolutePath = path.resolve(__dirname, pathToJSON)
+
+  const data = require(absolutePath);
   data[name] = object;
-  writeJSON(require.resolve(pathToJSON), data)
+  
+  writeJSON(absolutePath, data)
 }
 
 function countComposition(foods, foodsComposition) {
